@@ -1,7 +1,19 @@
 import React, { Component } from "react";
 
 class NuevaCita extends Component {
-  state = {};
+  state = {
+    cita: {
+      mascota: "",
+      propietario: "",
+      fecha: "",
+      hora: "",
+      sintomas: ""
+    }
+  };
+
+  handleChange = e => {
+    console.log(e.target.name + ": " + e.target.value);
+  };
   render() {
     return (
       <div className="card mt-5 py-5">
@@ -13,7 +25,7 @@ class NuevaCita extends Component {
           <form action="">
             <div className="form-group row">
               <label htmlFor="" className="col-sm-4 col-lg-2 col-form-label">
-                Nombre
+                Nombre de la mascota
               </label>
               <div className="col-sm-8 col-lg-10">
                 <input
@@ -21,6 +33,7 @@ class NuevaCita extends Component {
                   className="form-control"
                   placeholder="Nombre de la mascota"
                   name="mascota"
+                  onChange={this.handleChange}
                 />
               </div>
             </div>
