@@ -12,7 +12,13 @@ class NuevaCita extends Component {
   };
 
   handleChange = e => {
-    console.log(e.target.name + ": " + e.target.value);
+    /* colocar lo que el usuario escribe en el state */
+    this.setState({
+      cita: {
+        ...this.state.cita,
+        [e.target.name]: e.target.value
+      }
+    });
   };
   render() {
     return (
@@ -34,6 +40,7 @@ class NuevaCita extends Component {
                   placeholder="Nombre de la mascota"
                   name="mascota"
                   onChange={this.handleChange}
+                  value={this.state.cita.mascota}
                 />
               </div>
             </div>
@@ -47,6 +54,8 @@ class NuevaCita extends Component {
                   className="form-control"
                   placeholder="Nombre de la mascota"
                   name="propietario"
+                  onChange={this.handleChange}
+                  value={this.state.cita.propietario}
                 />
               </div>
             </div>
@@ -55,14 +64,21 @@ class NuevaCita extends Component {
                 Fecha
               </label>
               <div className="col-sm-8 col-lg-4">
-                <input type="date" className="form-control" name="fecha" />
+                <input type="date" className="form-control" name="fecha" onChange={this.handleChange}
+                  value={this.state.cita.fecha}/>
               </div>
 
               <label htmlFor="" className="col-sm-4 col-lg-2 col-form-label">
                 Hora
               </label>
               <div className="col-sm-8 col-lg-4">
-                <input type="time" className="form-control" name="hora" />
+                <input
+                  type="time"
+                  className="form-control"
+                  name="hora"
+                  onChange={this.handleChange}
+                  value={this.state.cita.hora}
+                />
               </div>
             </div>
             <div className="form-group row">
@@ -74,6 +90,8 @@ class NuevaCita extends Component {
                   className="form-control"
                   name="sintomas"
                   placeholder="Describe los Sintomas"
+                  onChange={this.handleChange}
+                  value={this.state.cita.sintomas}
                 ></textarea>
               </div>
             </div>
