@@ -8,9 +8,11 @@ class NuevaCita extends Component {
       fecha: "",
       hora: "",
       sintomas: ""
-    }
+    },
+    error : false
   };
 
+  /* Cuando el usuario escribe en los inputs */
   handleChange = e => {
     /* colocar lo que el usuario escribe en el state */
     this.setState({
@@ -20,6 +22,24 @@ class NuevaCita extends Component {
       }
     });
   };
+
+  /* Cuando el usuario envia el formulario */
+  handleSubmit = e => {
+    e.preventDefault();
+
+    /* Extraer los valores del state */
+    const { mascota, propietario, fecha, hora, sintomas } = this.state.cita;
+
+    /* Validar que todos los campos esten llenos */
+    if ( mascota === "" || propietario === "" || fecha === "" || hora === "" || sintomas === ""){
+        this.setState ({
+            error: true
+        });
+
+        /* Detener la ejecucion */
+        return
+    }
+};
   render() {
     return (
       <div className="card mt-5 py-5">
@@ -28,7 +48,7 @@ class NuevaCita extends Component {
             Llena el formulario para crear una nueva cita
           </h2>
 
-          <form action="">
+          <form action="" onSubmit={this.handleSubmit}>
             <div className="form-group row">
               <label htmlFor="" className="col-sm-4 col-lg-2 col-form-label">
                 Nombre de la mascota
@@ -64,8 +84,13 @@ class NuevaCita extends Component {
                 Fecha
               </label>
               <div className="col-sm-8 col-lg-4">
-                <input type="date" className="form-control" name="fecha" onChange={this.handleChange}
-                  value={this.state.cita.fecha}/>
+                <input
+                  type="date"
+                  className="form-control"
+                  name="fecha"
+                  onChange={this.handleChange}
+                  value={this.state.cita.fecha}
+                />
               </div>
 
               <label htmlFor="" className="col-sm-4 col-lg-2 col-form-label">
@@ -97,7 +122,7 @@ class NuevaCita extends Component {
             </div>
 
             <input
-              type="text"
+              type="submit"
               className="py-3 mt-2 btn btn-success btn-block"
               value="Agregar Nueva Cita"
             />
